@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Bill {
+public class User_Bill {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +17,11 @@ public class Bill {
 	String type,start_date,end_date;
 	byte[] file;
 	
-	public Bill() {
+	public User_Bill() {
 		super();
 	}
 	
-	public Bill(int id, String type, String start_date, String end_date, byte[] file) {
+	public User_Bill(int id, String type, String start_date, String end_date, byte[] file) {
 		super();
 		this.id = id;
 		this.type = type;
