@@ -14,16 +14,18 @@ public class User_Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
+	int employee_id;
 	String type,start_date,end_date;
 	byte[] file;
 	
 	public User_Bill() {
 		super();
 	}
-	
-	public User_Bill(int id, String type, String start_date, String end_date, byte[] file) {
+
+	public User_Bill(int id, int employee_id, String type, String start_date, String end_date, byte[] file) {
 		super();
 		this.id = id;
+		this.employee_id = employee_id;
 		this.type = type;
 		this.start_date = start_date;
 		this.end_date = end_date;
@@ -36,6 +38,14 @@ public class User_Bill {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getEmployee_id() {
+		return employee_id;
+	}
+
+	public void setEmployee_id(int employee_id) {
+		this.employee_id = employee_id;
 	}
 
 	public String getType() {
@@ -72,8 +82,9 @@ public class User_Bill {
 
 	@Override
 	public String toString() {
-		return "Bill [id=" + id + ", type=" + type + ", start_date=" + start_date + ", end_date=" + end_date + ", file="
-				+ Arrays.toString(file) + "]";
+		return "User_Bill [id=" + id + ", employee_id=" + employee_id + ", type=" + type + ", start_date=" + start_date
+				+ ", end_date=" + end_date + ", file=" + Arrays.toString(file) + "]";
 	}
-
+	
+	
 }
