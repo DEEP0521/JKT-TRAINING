@@ -2,10 +2,13 @@ package com.jkt.reimbursement.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Bill {
@@ -17,6 +20,30 @@ public class Bill {
 	String type,start_date,end_date;
 	byte[] file;
 	
+	@ManyToOne
+	private Users user;
+	
+	
+	
+	
+	
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Bill(String type, String start_date, String end_date, byte[] file, Users user) {
+		super();
+		this.type = type;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.file = file;
+		this.user = user;
+	}
+
 	public Bill() {
 		super();
 	}
