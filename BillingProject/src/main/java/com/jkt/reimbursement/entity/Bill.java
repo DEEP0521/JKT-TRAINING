@@ -1,13 +1,12 @@
 package com.jkt.reimbursement.entity;
 
-import java.util.Arrays;
 
-import javax.persistence.CascadeType;
+import java.io.File;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,44 +16,38 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	String type,start_date,end_date;
-	byte[] file;
+	
+	
+	String type;
+	String start_date;
+	String end_date;
+	
+	File file;
 	
 	@ManyToOne
 	private Users user;
 	
-	
-	
-	
-	
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
-	public Bill(String type, String start_date, String end_date, byte[] file, Users user) {
-		super();
-		this.type = type;
-		this.start_date = start_date;
-		this.end_date = end_date;
-		this.file = file;
-		this.user = user;
-	}
-
 	public Bill() {
 		super();
 	}
+
 	
-	public Bill(int id, String type, String start_date, String end_date, byte[] file) {
+	public Bill(String type, String start_date, String end_date, File file) {
 		super();
-		this.id = id;
 		this.type = type;
 		this.start_date = start_date;
 		this.end_date = end_date;
 		this.file = file;
+	}
+
+
+	public Bill(String type, String start_date, String end_date,File file, Users user) {	
+		super();
+		this.type = type;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.file = file;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -89,18 +82,26 @@ public class Bill {
 		this.end_date = end_date;
 	}
 
-	public byte[] getFile() {
+	public File getFile() {
 		return file;
 	}
 
-	public void setFile(byte[] file) {
+	public void setFile(File file) {
 		this.file = file;
+	}
+
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Bill [id=" + id + ", type=" + type + ", start_date=" + start_date + ", end_date=" + end_date + ", file="
-				+ Arrays.toString(file) + "]";
+				+ file + ", user=" + user + "]";
 	}
-
 }

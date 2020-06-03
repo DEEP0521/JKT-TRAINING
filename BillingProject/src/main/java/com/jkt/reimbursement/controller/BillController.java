@@ -3,16 +3,15 @@ package com.jkt.reimbursement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jkt.reimbursement.entity.Bill;
-import com.jkt.reimbursement.entity.Users;
 import com.jkt.reimbursement.service.BillService;
 
 @RestController
@@ -21,37 +20,21 @@ public class BillController {
 	@Autowired
 	private BillService billSer;
 	
-	@PostMapping("/Bills")
-	public Bill addBill(@RequestBody Bill bill)
-	{
-		//also just in case they pass an id in json then set id=0
-		//this is to force a save of new item...instead of update
-		bill.setId(0);
-		billSer.postBill(bill);
-		return bill;
-		
-	}
+	//Controller Method
+	
+		@PostMapping(path= "/Bills",consumes = "multipart/form-data")
+		public void addBillUnderUser(@ModelAttribute Bill bill,BindingResult result) 
+		{
+			System.out.println(bill.getUser()+"\n"+bill.getFile());
+			billSer.AddBill(bill);
+		}
 	
 	//mapping
-	@PostMapping("/users/{id}/Bills")
-	public Bill addBillUnderUser(@RequestBody Bill bill,@PathVariable String id)
+	@GetMapping("/users/{id}/Bills")
+	public List<Bill> getAllBillsByUserId(@PathVariable String id)
 	{
-		//also just in case they pass an id in json then set id=0
-		//this is to force a save of new item...instead of update
-		bill.setId(0);
-		//Users us=new Users();
-		bill.setUser(new Users(id));
-		billSer.AddBill(bill);
-		return bill;
-		
+		return billSer.getAllBillByUsersId(id);
 	}
-	
-	//mapping
-			@GetMapping("/users/{id}/Bills")
-			public List<Bill> getAllBillsByUserId(@PathVariable String id)
-			{
-				return billSer.getAllBillByUsersId(id);
-			}
 	
 	@GetMapping("/Bills")
 	public List<Bill> showBills()
@@ -81,16 +64,6 @@ public class BillController {
 		}
 		return theBill;
 	}
-	
-	
-	
-	@PutMapping("/Bills")
-	public Bill updateBill(@RequestBody Bill bill)
-	{
-		billSer.postBill(bill);
-		return bill;
-	}
-	
 	
 
 }

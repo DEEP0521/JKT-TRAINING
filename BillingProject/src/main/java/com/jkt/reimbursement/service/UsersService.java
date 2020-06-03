@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.entity.Users;
-import com.jkt.reimbursement.repository.BillRepository;
 import com.jkt.reimbursement.repository.UsersRepository;
 
 

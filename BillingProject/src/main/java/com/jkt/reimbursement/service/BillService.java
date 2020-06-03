@@ -17,17 +17,17 @@ public class BillService {
 	@Autowired
 	private BillRepository billRepo;
 	
-	public void postBill(Bill bill)
-	{
-		billRepo.save(bill);
-	}
+	//Service Method
 	
-	//mapping add bill user/bill
-	public void AddBill(Bill bill)
-	{
-		billRepo.save(bill);
-	}
-	
+	public Bill AddBill(Bill bill)
+		{
+			try {
+				return billRepo.save(bill);
+			}catch(Exception e) {
+				System.out.println(e);
+			}
+			return null;
+		}
 	
 	public List<Bill> getBills()
 	{
