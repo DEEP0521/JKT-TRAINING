@@ -44,12 +44,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-<<<<<<< HEAD
-import com.jkt.reimbursement.entity.User_Bill;
-=======
 import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.entity.Users;
->>>>>>> feature
+
 import com.jkt.reimbursement.service.BillService;
 
 @RestController
@@ -58,17 +55,7 @@ public class BillController {
 	@Autowired
 	private BillService billSer;
 	
-	
-<<<<<<< HEAD
-	public String addBill(@RequestBody User_Bill bill)
-	{
-		billSer.postBill(bill);
-		return "Bill Added";
-	}
-	
-	@GetMapping("/Bills")
-	public List<User_Bill> showBills()
-=======
+
 	//@PostMapping(path="/Bills",consumes="multipart/form-data")
 	//public Bill addBill(@ModelAttribute Bill bill)
 	//{ 
@@ -117,7 +104,6 @@ public class BillController {
    public List<Bill> showBills()
 	//@GetMapping("/List")
 	//public String showBills(Model themodel)
->>>>>>> feature
 	{
 		//List<Bill> bill=billSer.getBills();
 		//themodel.addAttribute("bills",bill);

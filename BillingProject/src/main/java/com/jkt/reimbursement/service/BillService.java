@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jkt.reimbursement.entity.User_Bill;
+import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.repository.BillRepository;
-import java.io.IOException;
 
 
 @Service
@@ -21,14 +20,12 @@ public class BillService {
 	@Autowired
 	private BillRepository billRepo;
 	
-	public void postBill(User_Bill bill)
+	public void postBill(Bill bill)
 	{
 		billRepo.save(bill);
 	}
 	
-<<<<<<< HEAD
-	public List<User_Bill> getBills()
-=======
+
 	//mapping add bill user/bill
 	public void AddBill(Bill bill,MultipartFile file)
 	{
@@ -43,7 +40,6 @@ public class BillService {
 	
 	
 	public List<Bill> getBills()
->>>>>>> feature
 	{
 		return billRepo.findAll();
 		
@@ -51,7 +47,7 @@ public class BillService {
 	
 	public void delBill(int id)
 	{
-		User_Bill bill=billRepo.getOne(id);
+		Bill bill=billRepo.getOne(id);
 		billRepo.delete(bill);
 	}
 	
