@@ -1,0 +1,31 @@
+<!Doctype html>
+<html xmln:th="http://www.thymeleaf.org">
+<head>
+<title> List Bill </title>
+</head>
+
+<body>
+<table border="1">
+<thead>
+<tr>
+<th>Bill Type</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>File</th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="thebill : ${bills}">
+
+<td th:text="${thebill.type}"/>
+<td th:date="${thebill.start_date}"/>
+<td th:date="${thebill.end_date}"/>
+<td th:file="${thebill.file}"/>
+</tr>
+
+</tbody>
+
+</table>
+</body>
+</html>

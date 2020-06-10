@@ -1,14 +1,18 @@
 package com.jkt.reimbursement.entity;
 
+import java.io.File;
+import java.sql.Blob;
 import java.util.Arrays;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Bill {
@@ -18,7 +22,13 @@ public class Bill {
 	int id;
 	
 	String type,start_date,end_date;
-	byte[] file;
+	
+	 @Lob
+	  byte[] file;
+	
+	// @Lob
+	 //private MultipartFile  file;
+	
 	
 	@ManyToOne
 	private Users user;
@@ -35,7 +45,7 @@ public class Bill {
 		this.user = user;
 	}
 
-	public Bill(String type, String start_date, String end_date, byte[] file, Users user) {
+	public Bill(String type, String start_date, String end_date, byte[]  file, Users user) {
 		super();
 		this.type = type;
 		this.start_date = start_date;
@@ -48,9 +58,8 @@ public class Bill {
 		super();
 	}
 	
-	public Bill(int id, String type, String start_date, String end_date, byte[] file) {
-		super();
-		this.id = id;
+	
+	public Bill( String type, String start_date, String end_date,  byte[]  file) {
 		this.type = type;
 		this.start_date = start_date;
 		this.end_date = end_date;
@@ -89,18 +98,21 @@ public class Bill {
 		this.end_date = end_date;
 	}
 
-	public byte[] getFile() {
+	public  byte[]  getFile() {
 		return file;
 	}
 
-	public void setFile(byte[] file) {
+	public void setFile(  byte[]   file) {
 		this.file = file;
 	}
 
 	@Override
 	public String toString() {
 		return "Bill [id=" + id + ", type=" + type + ", start_date=" + start_date + ", end_date=" + end_date + ", file="
-				+ Arrays.toString(file) + "]";
+				+ file + ", user=" + user + "]";
 	}
+
+	
+
 
 }
