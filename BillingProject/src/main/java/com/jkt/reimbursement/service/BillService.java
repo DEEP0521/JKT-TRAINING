@@ -1,11 +1,13 @@
 package com.jkt.reimbursement.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.repository.BillRepository;
@@ -19,15 +21,19 @@ public class BillService {
 	
 	//Service Method
 	
-	public Bill AddBill(Bill bill)
-		{
-			try {
-				return billRepo.save(bill);
-			}catch(Exception e) {
-				System.out.println(e);
-			}
-			return null;
+	public Bill AddBill(Bill bill,MultipartFile file)
+	{
+		try {
+			
+			bill.setFile(file.getBytes());
+			
+		}catch(Exception e) {
+			System.out.println(e);
 		}
+		System.out.println(bill.getMonth()+"\n"+bill.getFile()+"\n"+bill.getUser()+"\n"+bill.getType());
+		billRepo.save(bill);
+		return billRepo.save(bill);
+	}
 	
 	public List<Bill> getBills()
 	{

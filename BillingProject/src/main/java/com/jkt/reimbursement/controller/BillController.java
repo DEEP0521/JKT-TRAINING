@@ -3,13 +3,18 @@ package com.jkt.reimbursement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.service.BillService;
@@ -20,15 +25,20 @@ public class BillController {
 	@Autowired
 	private BillService billSer;
 	
+	
 	//Controller Method
 	
-		@PostMapping(path= "/Bills",consumes = "multipart/form-data")
-		public void addBillUnderUser(@ModelAttribute Bill bill,BindingResult result) 
+		@PostMapping(path= "/Bills")
+		@ResponseBody
+		public ResponseEntity<Object> addBillUnderUser(@ModelAttribute Bill bill,BindingResult result,
+				@ModelAttribute("file") MultipartFile file) 
 		{
-			System.out.println(bill.getUser()+"\n"+bill.getFile());
-			billSer.AddBill(bill);
+			billSer.AddBill(bill,file);
+			return new ResponseEntity<> ("File Uploaded",HttpStatus.OK);
 		}
-	
+
+		
+		
 	//mapping
 	@GetMapping("/users/{id}/Bills")
 	public List<Bill> getAllBillsByUserId(@PathVariable String id)
@@ -36,7 +46,8 @@ public class BillController {
 		return billSer.getAllBillByUsersId(id);
 	}
 	
-	@GetMapping("/Bills")
+	@GetMapping(path = "/Bills",produces = {"application/pdf","text/plain"})
+	@CrossOrigin
 	public List<Bill> showBills()
 	{
 		return billSer.getBills();
@@ -64,6 +75,5 @@ public class BillController {
 		}
 		return theBill;
 	}
-	
 
 }

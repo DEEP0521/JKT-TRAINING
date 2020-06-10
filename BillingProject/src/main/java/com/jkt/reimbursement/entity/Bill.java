@@ -1,12 +1,12 @@
 package com.jkt.reimbursement.entity;
 
-
-import java.io.File;
+import java.util.Arrays;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,39 +15,18 @@ public class Bill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	
-	
-	
+
 	String type;
-	String start_date;
-	String end_date;
+	String month;
 	
-	File file;
+	@Lob
+	byte[] file;
 	
 	@ManyToOne
 	private Users user;
 	
 	public Bill() {
 		super();
-	}
-
-	
-	public Bill(String type, String start_date, String end_date, File file) {
-		super();
-		this.type = type;
-		this.start_date = start_date;
-		this.end_date = end_date;
-		this.file = file;
-	}
-
-
-	public Bill(String type, String start_date, String end_date,File file, Users user) {	
-		super();
-		this.type = type;
-		this.start_date = start_date;
-		this.end_date = end_date;
-		this.file = file;
-		this.user = user;
 	}
 
 	public int getId() {
@@ -65,31 +44,22 @@ public class Bill {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public String getStart_date() {
-		return start_date;
+	
+	public String getMonth() {
+		return month;
 	}
 
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
-	public String getEnd_date() {
-		return end_date;
-	}
-
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
-	}
-
-	public File getFile() {
+	public byte[] getFile() {
 		return file;
 	}
 
-	public void setFile(File file) {
+	public void setFile(byte[] file) {
 		this.file = file;
 	}
-
 
 	public Users getUser() {
 		return user;
@@ -101,7 +71,8 @@ public class Bill {
 
 	@Override
 	public String toString() {
-		return "Bill [id=" + id + ", type=" + type + ", start_date=" + start_date + ", end_date=" + end_date + ", file="
-				+ file + ", user=" + user + "]";
+		return "Bill [id=" + id + ", type=" + type + ", month=" + month + ", file=" + Arrays.toString(file) + ", user="
+				+ user + "]";
 	}
+
 }
