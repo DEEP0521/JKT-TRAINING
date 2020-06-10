@@ -1,0 +1,36 @@
+CREATE TABLE Student1
+(
+Student1_id NUMBER (4),
+Student1_name VARCHAR2 (25),
+city VARCHAR2 (15)
+);
+insert into Student1 values(002,'faisal','Delhi');
+insert into Student1 values(009,'Shahid','Delhi');
+insert into Student1 values(001,'omair','House-12 Delhi');
+insert into Student1 values(006,'Nikhil','Govindpuri');
+insert into Student1 values(008,'Ali','Jasola');
+insert into Student1 values(002,'Badshah',NULL);
+
+select *from Student1;
+
+
+CREATE TABLE Employee(
+EmpID int,
+LastName varchar(225),
+FirstName varchar(225),
+Address varchar(225),
+city varchar(225)
+);
+
+insert into Employee values(007,'khan','Faisal','F-303 vasundhra Enclave','Delhi');
+select LastName,city From Employee
+SELECT DISTINCT EmpID,LastName from Employee;
+delete from Employee where FirstName='Nikhil'
+
+Alter table employee
+Add Primary Key(EmpID)
+select *from Employee where EmpID=007;
+insert into Employee values(006,'kannan','Nikhil','Govindpuri','Delhi');
+insert into Employee values(005,'Rahman','Omair','f-9 patel nagar chest','Delhi');
+
+select *from Employee
