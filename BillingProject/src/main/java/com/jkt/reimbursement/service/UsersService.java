@@ -6,9 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jkt.reimbursement.entity.Bill;
 import com.jkt.reimbursement.entity.Users;
-import com.jkt.reimbursement.repository.BillRepository;
+import com.jkt.reimbursement.exception.GlobalException;
 import com.jkt.reimbursement.repository.UsersRepository;
 
 
@@ -25,22 +24,23 @@ public class UsersService {
 		
 	}
 	
-	public Users findById(String id)
+	public Optional<Users> getByEmployeeId(String id)
 	{
-		Optional<Users> result=userRepo.findById(id);
-		Users theuser=null;
-		if(result.isPresent())
-		{
-			theuser=result.get();
+		Optional<Users> empId=userRepo.findById(id);
+		if(empId.isPresent()) {
+			return userRepo.findById(id);
 		}
-		return theuser;
+		else
+			throw new GlobalException("Employee Record not Found!");
+	}
+
+	public List<Users> getByDepartmentId(int id) {
+		List<Users> empId=userRepo.findByDepartId(id);
+		if(empId.isEmpty()==false) {
+			return userRepo.findByDepartId(id);
+		}
+		else
+			throw new GlobalException("Employee Record not Found!");
 	}
 	
-	
-	/*
-	 * public Users findById(int id) { Optional<Users> result=userRepo.findById(id);
-	 * 
-	 * Users theuser=null; if(result.isPresent()) { theuser=result.get(); } return
-	 * theuser; }
-	 */
 }

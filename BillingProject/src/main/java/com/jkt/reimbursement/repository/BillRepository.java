@@ -11,5 +11,4 @@ import com.jkt.reimbursement.entity.Bill;
 public interface BillRepository extends JpaRepository<Bill, Integer> {
 
 	List<Bill> findByUserId(String username);
-
 }

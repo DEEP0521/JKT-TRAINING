@@ -3,7 +3,6 @@ package com.jkt.reimbursement.entity;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,15 +14,19 @@ public class Users {
 	
 	@Id
 	@Column(name="username")
-	private String id; 
+	private String id;
+	
 	private String first_name;
 	private String last_name;
 	 private String password;
 	 private String email;
 	private char enabled;                                   
 	private String updated_by ;              
-	Timestamp updated_date;            
-	private int department_id;          
+	Timestamp updated_date;
+	
+	@Column(name="department_id")
+	private int departId;
+	
 	private String base_location;            
 	private String emp_category;            
 	private String lineManager;              
@@ -46,7 +49,7 @@ public class Users {
 	}
 
 	public Users(String id, String first_name, String last_name, String password, String email, char enabled,
-			String updated_by, Timestamp updated_date, int department_id, String base_location, String emp_category,
+			String updated_by, Timestamp updated_date, int departId, String base_location, String emp_category,
 			String lineManager, String workingStatus, int isLineManager, int skillset_email_reminder,
 			int defaulter_email_reminder, Date createdDate, Date joiningDate, Date deactivatedDate, Date updatedCV_date,
 			Date lastMailSent, String resume_status, String manager_notes, String mobile_attendance) {
@@ -59,7 +62,7 @@ public class Users {
 		this.enabled = enabled;
 		this.updated_by = updated_by;
 		this.updated_date = updated_date;
-		this.department_id = department_id;
+		this.departId = departId;
 		this.base_location = base_location;
 		this.emp_category = emp_category;
 		this.lineManager = lineManager;
@@ -144,13 +147,13 @@ public class Users {
 	public void setUpdated_date(Timestamp updated_date) {
 		this.updated_date = updated_date;
 	}
-
-	public int getDepartment_id() {
-		return department_id;
+	
+	public int getDepartId() {
+		return departId;
 	}
 
-	public void setDepartment_id(int department_id) {
-		this.department_id = department_id;
+	public void setDepartId(int departId) {
+		this.departId = departId;
 	}
 
 	public String getBase_location() {
@@ -273,6 +276,4 @@ public class Users {
 		this.mobile_attendance = mobile_attendance;
 	}
 	
-	
-
 }
