@@ -69,24 +69,16 @@ public class BillController {
 
 	@CrossOrigin
 	@DeleteMapping("/Bills/{id}")
-	public String deleteBill(@PathVariable int id)
+	public void deleteBill(@PathVariable int id)
 	{
-		Bill thebill=billSer.findById(id);
-		if(thebill==null)
-		{
-			throw new RuntimeException("Employee id not found-" +id);
-		}
-		else {
-			billSer.delBill(id);
-			return "File Deleted";
-		}
+		billSer.delBill(id);
 	}
 	
-	@PutMapping("/Bills")
-	public Bill updateBill(@RequestBody Bill bill)
+	@CrossOrigin
+	@PutMapping("/Bills/{id}")
+	public void updateBill(@RequestBody Bill bill,@PathVariable int id)
 	{
-		billSer.postBill(bill);
-		return bill;
+		billSer.updateBill(bill,id);
 	}
 	
 
