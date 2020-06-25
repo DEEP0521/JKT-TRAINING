@@ -9,5 +9,5 @@ import com.jkt.reimbursement.entity.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, String> {
-	List<Users> findByDepartId(int dept_id);
+	List<Users> findByDepartId(int departmentId);
 }
