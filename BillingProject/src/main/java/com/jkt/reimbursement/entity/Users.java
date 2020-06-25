@@ -14,38 +14,32 @@ public class Users {
 	
 	@Id
 	@Column(name="username")
-	private String id;
+	String id;                                                    //fetching
 	
-	private String first_name;
-	private String last_name;
-	 private String password;
-	 private String email;
-	private char enabled;                                   
-	private String updated_by ;              
-	Timestamp updated_date;
+	String first_name, last_name, password, email;                //fetching
+	char enabled;                                                 //fetching
+	String updated_by;                                            //fetching
+	Timestamp updated_date;                                       //fetching
 	
 	@Column(name="department_id")
-	private int departId;
+	int departId;                                                 //fetching
 	
-	private String base_location;            
-	private String emp_category;            
-	private String lineManager;              
-	private String workingStatus;            
-	private int isLineManager;           
-	private int skillset_email_reminder ; 
-	private int defaulter_email_reminder;
-	 Date createdDate;             
-	Date joiningDate;                     
-	Date deactivatedDate;         
-	Date updatedCV_date;           
-	Date lastMailSent;             
-	String resume_status;            
-	String manager_notes;            
-	String mobile_attendance;
+	String base_location, emp_category;                            //fetching
 	
-	public Users()
-	{
-		
+	@Column(name="lineManager")
+	String lineManager;                   //not-fetching
+	
+	String workingStatus;                                          //fetching
+	int isLineManager;                                             //fetching
+	int skillset_email_reminder, defaulter_email_reminder;         //fetching
+	
+	Date createdDate, joiningDate;        //not-fetching                     
+	
+	Date deactivatedDate, updatedCV_date, lastMailSent;            //fetching
+	String resume_status, manager_notes, mobile_attendance;        //fetching
+	
+	public Users() {
+		super();
 	}
 
 	public Users(String id, String first_name, String last_name, String password, String email, char enabled,
@@ -53,7 +47,7 @@ public class Users {
 			String lineManager, String workingStatus, int isLineManager, int skillset_email_reminder,
 			int defaulter_email_reminder, Date createdDate, Date joiningDate, Date deactivatedDate, Date updatedCV_date,
 			Date lastMailSent, String resume_status, String manager_notes, String mobile_attendance) {
-		
+		super();
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -78,10 +72,6 @@ public class Users {
 		this.resume_status = resume_status;
 		this.manager_notes = manager_notes;
 		this.mobile_attendance = mobile_attendance;
-	}
-	public Users(String id)
-	{
-		this.id=id;
 	}
 
 	public String getId() {
@@ -147,7 +137,7 @@ public class Users {
 	public void setUpdated_date(Timestamp updated_date) {
 		this.updated_date = updated_date;
 	}
-	
+
 	public int getDepartId() {
 		return departId;
 	}
@@ -275,5 +265,6 @@ public class Users {
 	public void setMobile_attendance(String mobile_attendance) {
 		this.mobile_attendance = mobile_attendance;
 	}
+
 	
 }

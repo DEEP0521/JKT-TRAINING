@@ -59,12 +59,9 @@ public class BillController {
 		System.out.println(id);
 		Bill b=billSer.getFile(id);
 		return ResponseEntity.ok()
-				       // .contentType(MediaType.parseMediaType(b.getType()))
-				        .header("content-type", "multipart/form-data")
-				        .header(HttpHeaders.CONTENT_DISPOSITION, "attachments;file=\"" +b.getType())
-				        .body(new ByteArrayResource(b.getFile()));
-		
-					
+				       .header("content-type", "multipart/form-data")
+				       .header(HttpHeaders.CONTENT_DISPOSITION, "attachments;file=\"" +b.getType())
+				       .body(new ByteArrayResource(b.getFile()));
 	}
 
 	@CrossOrigin

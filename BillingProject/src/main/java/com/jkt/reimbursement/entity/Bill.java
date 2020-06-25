@@ -18,8 +18,8 @@ public class Bill {
 	
 	String type,month,remark;
 	
-	 @Lob
-	  byte[] file;
+	@Lob
+	byte[] file;
 	
 	@ManyToOne
 	private Users user;
