@@ -2,7 +2,6 @@ package com.jkt.reimbursement.entity;
 
 import java.util.Arrays;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,7 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	String type,month;
+	String type,month,remark;
 	
 	 @Lob
 	  byte[] file;
@@ -25,7 +24,14 @@ public class Bill {
 	@ManyToOne
 	private Users user;
 	
-	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public Users getUser() {
 		return user;
 	}
@@ -68,7 +74,7 @@ public class Bill {
 
 	@Override
 	public String toString() {
-		return "Bill [id=" + id + ", type=" + type + ", month=" + month + ", file="
+		return "Bill [id=" + id + ", type=" + type + ", month=" + month + ", remark=" + remark + ", file="
 				+ Arrays.toString(file) + ", user=" + user + "]";
 	}
 
