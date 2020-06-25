@@ -23,7 +23,7 @@ public class Department {
 	private String departmentName;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "sbu_id")
 	private Sbu sbu_id;
 
 	@Column(name = "direct_indirect")

@@ -2,10 +2,12 @@ package com.jkt.reimbursement.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
@@ -14,14 +16,24 @@ public class Bill {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	int id;
 	
-	String type,month,remark;
+	@Column(name = "type")
+	String type;
+	
+	@Column(name = "month")
+	String month;
+	
+	@Column(name = "remark")
+	String remark;
 	
 	@Lob
+	@Column(name = "file")
 	byte[] file;
 	
 	@ManyToOne
+	@JoinColumn(name = "user")
 	private Users user;
 	
 	public String getRemark() {

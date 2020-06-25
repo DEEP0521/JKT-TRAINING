@@ -2,19 +2,17 @@
 package com.jkt.reimbursement.entity;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-
 @Table(name = "users")
 public class Users {
 
@@ -42,11 +40,10 @@ public class Users {
 	private String updated_by;
 
 	@Column(name = "update_date")
-	Timestamp updated_date;
+	private Timestamp updated_date;
 
 	@OneToOne
-
-	@JoinColumn
+	@JoinColumn(name = "department_id")
 	private Department department_id;
 
 	@Column(name = "base_location")
@@ -70,28 +67,30 @@ public class Users {
 	private int defaulter_email_reminder;
 
 	@Column(name = "createdDate")
-	Date createdDate;
+	private DateTimeFormatter createdDate =DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//	private Timestamp createdDate;
 
 	@Column(name = "joiningDate")
-	Date joiningDate;
+	DateTimeFormatter joiningDate =DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//	private Timestamp joiningDate;
 
 	@Column(name = "deactivatedDate")
-	Date deactivatedDate;
+	private Date deactivatedDate;
 
 	@Column(name = "updatedCV_date")
-	Date updatedCV_date;
+	private Date updatedCV_date;
 
 	@Column(name = "lastMailSent")
-	Date lastMailSent;
+	private Date lastMailSent;
 
 	@Column(name = "resume_status")
-	String resume_status;
+	private String resume_status;
 
 	@Column(name = "manager_notes")
-	String manager_notes;
+	private String manager_notes;
 
 	@Column(name = "mobile_attendance")
-	String mobile_attendance;
+	private String mobile_attendance;
 
 	public Users() {
 
@@ -100,11 +99,10 @@ public class Users {
 	public Users(String id, String first_name, String last_name, String password, String email, char enabled,
 			String updated_by, Timestamp updated_date, Department department_id, String base_location,
 			String emp_category, String lineManager, String workingStatus, int isLineManager,
-			int skillset_email_reminder, int defaulter_email_reminder, Date createdDate, Date joiningDate,
-			Date deactivatedDate, Date updatedCV_date, Date lastMailSent, String resume_status, String manager_notes,
-			String mobile_attendance) {
-
->>>>>>> 1248e75fc0927f0a558d4109b84af2bafbfe52ad
+			int skillset_email_reminder, int defaulter_email_reminder, DateTimeFormatter createdDate,
+			DateTimeFormatter joiningDate, Date deactivatedDate, Date updatedCV_date, Date lastMailSent,
+			String resume_status, String manager_notes, String mobile_attendance) {
+		super();
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -130,13 +128,6 @@ public class Users {
 		this.manager_notes = manager_notes;
 		this.mobile_attendance = mobile_attendance;
 	}
-<<<<<<< HEAD
-=======
-
-	public Users(String id) {
-		this.id = id;
-	}
->>>>>>> 1248e75fc0927f0a558d4109b84af2bafbfe52ad
 
 	public String getId() {
 		return id;
@@ -202,16 +193,11 @@ public class Users {
 		this.updated_date = updated_date;
 	}
 
-<<<<<<< HEAD
-	public int getDepartId() {
-		return departId;
-=======
-	public Department getDepartId() {
+	public Department getDepartment_id() {
 		return department_id;
->>>>>>> 1248e75fc0927f0a558d4109b84af2bafbfe52ad
 	}
 
-	public void setDepartId(Department department_id) {
+	public void setDepartment_id(Department department_id) {
 		this.department_id = department_id;
 	}
 
@@ -271,19 +257,19 @@ public class Users {
 		this.defaulter_email_reminder = defaulter_email_reminder;
 	}
 
-	public Date getCreatedDate() {
+	public DateTimeFormatter getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(DateTimeFormatter createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getJoiningDate() {
+	public DateTimeFormatter getJoiningDate() {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(Date joiningDate) {
+	public void setJoiningDate(DateTimeFormatter joiningDate) {
 		this.joiningDate = joiningDate;
 	}
 
@@ -334,9 +320,5 @@ public class Users {
 	public void setMobile_attendance(String mobile_attendance) {
 		this.mobile_attendance = mobile_attendance;
 	}
-
-<<<<<<< HEAD
 	
-=======
->>>>>>> 1248e75fc0927f0a558d4109b84af2bafbfe52ad
 }
