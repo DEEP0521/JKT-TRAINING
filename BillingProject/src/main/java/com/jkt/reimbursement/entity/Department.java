@@ -29,4 +29,50 @@ public class Department {
 	@Column(name = "direct_indirect")
 	private String directIndirect;
 
+	
+
+	public int getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public String getDepartmentCode() {
+		return departmentCode;
+	}
+
+	public void setDepartmentCode(String departmentCode) {
+		this.departmentCode = departmentCode;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public Sbu getSbu_id() {
+		return sbu_id;
+	}
+
+	public void setSbu_id(Sbu sbu_id) {
+		this.sbu_id = sbu_id;
+	}
+
+	public String getDirectIndirect() {
+		return directIndirect;
+	}
+
+	public void setDirectIndirect(String directIndirect) {
+		this.directIndirect = directIndirect;
+	}
+	
+	
+	
+	
+
 }

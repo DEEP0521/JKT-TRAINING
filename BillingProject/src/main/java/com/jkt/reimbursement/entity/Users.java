@@ -2,7 +2,7 @@
 package com.jkt.reimbursement.entity;
 
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "users")
@@ -36,15 +39,15 @@ public class Users {
 	@Column(name = "enabled")
 	private char enabled;
 
-	@Column(name = "update_by")
+	@Column(name = "updated_by")
 	private String updated_by;
 
-	@Column(name = "update_date")
+	@Column(name = "updated_date")
 	private Timestamp updated_date;
 
 	@OneToOne
 	@JoinColumn(name = "department_id")
-	private Department department_id;
+	private Department departmentId;
 
 	@Column(name = "base_location")
 	private String base_location;
@@ -60,26 +63,30 @@ public class Users {
 	@Column(name = "isLineManager")
 	private int isLineManager;
 
-	@Column(name = "skillset_email_reminder")
-	private int skillset_email_reminder;
+	
+	//@Column(name = "skillset_email_reminder")
+	//private byte skillset_email_reminder;
 
 	@Column(name = "defaulter_email_reminder")
 	private int defaulter_email_reminder;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "createdDate")
-	private DateTimeFormatter createdDate =DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//	private Timestamp createdDate;
+    private Date createdDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "joiningDate")
-	DateTimeFormatter joiningDate =DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//	private Timestamp joiningDate;
+	//DateTimeFormatter joiningDate =DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+	private Date joiningDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "deactivatedDate")
 	private Date deactivatedDate;
 
 	@Column(name = "updatedCV_date")
 	private Date updatedCV_date;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "lastMailSent")
 	private Date lastMailSent;
 
@@ -97,10 +104,10 @@ public class Users {
 	}
 
 	public Users(String id, String first_name, String last_name, String password, String email, char enabled,
-			String updated_by, Timestamp updated_date, Department department_id, String base_location,
-			String emp_category, String lineManager, String workingStatus, int isLineManager,
-			int skillset_email_reminder, int defaulter_email_reminder, DateTimeFormatter createdDate,
-			DateTimeFormatter joiningDate, Date deactivatedDate, Date updatedCV_date, Date lastMailSent,
+			String updated_by, Timestamp updated_date, Department departmentId, String base_location,
+			String emp_category, String lineManager, String workingStatus,
+			 int defaulter_email_reminder,Date createdDate,Date lastMailSent,
+			 Date updatedCV_date,int isLineManager,Date joiningDate,Date deactivatedDate,
 			String resume_status, String manager_notes, String mobile_attendance) {
 		super();
 		this.id = id;
@@ -111,13 +118,13 @@ public class Users {
 		this.enabled = enabled;
 		this.updated_by = updated_by;
 		this.updated_date = updated_date;
-		this.department_id = department_id;
+		this.departmentId = departmentId;
 		this.base_location = base_location;
 		this.emp_category = emp_category;
 		this.lineManager = lineManager;
 		this.workingStatus = workingStatus;
 		this.isLineManager = isLineManager;
-		this.skillset_email_reminder = skillset_email_reminder;
+		//this.skillset_email_reminder = skillset_email_reminder;
 		this.defaulter_email_reminder = defaulter_email_reminder;
 		this.createdDate = createdDate;
 		this.joiningDate = joiningDate;
@@ -193,12 +200,12 @@ public class Users {
 		this.updated_date = updated_date;
 	}
 
-	public Department getDepartment_id() {
-		return department_id;
+	public Department getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartment_id(Department department_id) {
-		this.department_id = department_id;
+	public void setDepartmentid(Department departmentId) {
+		this.departmentId = departmentId;
 	}
 
 	public String getBase_location() {
@@ -241,13 +248,13 @@ public class Users {
 		this.isLineManager = isLineManager;
 	}
 
-	public int getSkillset_email_reminder() {
-		return skillset_email_reminder;
-	}
+	//public byte getSkillset_email_reminder() {
+		//return skillset_email_reminder;
+	//}
 
-	public void setSkillset_email_reminder(int skillset_email_reminder) {
-		this.skillset_email_reminder = skillset_email_reminder;
-	}
+	//public void setSkillset_email_reminder(byte skillset_email_reminder) {
+		//this.skillset_email_reminder = skillset_email_reminder;
+	//}
 
 	public int getDefaulter_email_reminder() {
 		return defaulter_email_reminder;
@@ -257,19 +264,19 @@ public class Users {
 		this.defaulter_email_reminder = defaulter_email_reminder;
 	}
 
-	public DateTimeFormatter getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(DateTimeFormatter createdDate) {
+	public void setCreatedDate(java.sql.Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public DateTimeFormatter getJoiningDate() {
+	public Date getJoiningDate() {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(DateTimeFormatter joiningDate) {
+	public void setJoiningDate(Date joiningDate ) {
 		this.joiningDate = joiningDate;
 	}
 
@@ -293,9 +300,9 @@ public class Users {
 		return lastMailSent;
 	}
 
-	public void setLastMailSent(Date lastMailSent) {
-		this.lastMailSent = lastMailSent;
-	}
+	//public void setLastMailSent(Date lastMailSent) {
+		//this.lastMailSent = lastMailSent;
+	//}
 
 	public String getResume_status() {
 		return resume_status;

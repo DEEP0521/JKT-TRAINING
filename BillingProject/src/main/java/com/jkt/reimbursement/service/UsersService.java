@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jkt.reimbursement.entity.Department;
 import com.jkt.reimbursement.entity.Users;
 import com.jkt.reimbursement.exception.GlobalException;
 import com.jkt.reimbursement.repository.UsersRepository;
@@ -34,10 +35,10 @@ public class UsersService {
 			throw new GlobalException("Employee Record not Found!");
 	}
 
-	public List<Users> getByDepartmentId(int id) {
-		List<Users> empId=userRepo.findByDepartId(id);
+	public List<Users> getByDepartmentId(Department id) {
+		List<Users> empId=userRepo.findByDepartmentId(id);
 		if(empId.isEmpty()==false) {
-			return userRepo.findByDepartId(id);
+			return userRepo.findByDepartmentId(id);
 		}
 		else
 			throw new GlobalException("Employee Record not Found!");

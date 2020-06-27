@@ -18,4 +18,30 @@ public class Sbu {
 	
 	@Column(name="sbu_name")
 	private String sbuName;
+
+	public int getSbuId() {
+		return sbuId;
+	}
+
+	public void setSbuId(int sbuId) {
+		this.sbuId = sbuId;
+	}
+
+	public String getSbuCode() {
+		return sbuCode;
+	}
+
+	public void setSbuCode(String sbuCode) {
+		this.sbuCode = sbuCode;
+	}
+
+	public String getSbuName() {
+		return sbuName;
+	}
+
+	public void setSbuName(String sbuName) {
+		this.sbuName = sbuName;
+	}
+	
+	
 }
