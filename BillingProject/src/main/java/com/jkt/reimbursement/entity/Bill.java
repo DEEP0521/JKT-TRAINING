@@ -38,6 +38,19 @@ public class Bill {
 	@JoinColumn(name = "user")
 	private Users user;
 	
+	public Bill() {
+		super();
+	}
+	
+	public Bill(String type, String month, String remark, byte[] file, Users user) {
+		super();
+		this.type = type;
+		this.month = month;
+		this.remark = remark;
+		this.file = file;
+		this.user = user;
+	}
+
 	public String getRemark() {
 		return remark;
 	}

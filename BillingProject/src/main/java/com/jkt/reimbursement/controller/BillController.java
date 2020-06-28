@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jkt.reimbursement.entity.Bill;
+import com.jkt.reimbursement.entity.Users;
 import com.jkt.reimbursement.service.BillService;
 
 @RestController
@@ -41,29 +41,39 @@ public class BillController {
 		{
 			throw new RuntimeException("Employee id not found-" +userId);
 		}
-		return theBill;
+		else
+			return theBill;
 	}
 	
 	@PostMapping("/users/{id}/bills")
 	public ResponseEntity<Object> AddBillWithFile(@ModelAttribute Bill bill,BindingResult result,
 			@RequestParam("file") MultipartFile file)
 	{
-		billSer.AddBill(bill, file);
-		return new ResponseEntity<>("JSON Along with File Uploaded",HttpStatus.OK);
+		boolean b=billSer.AddBill(bill, file);
+		if(b==true)
+			return new ResponseEntity<>("JSON Along with File Uploaded",HttpStatus.OK);
+		else
+			return new ResponseEntity<>("File upload failure",HttpStatus.BAD_REQUEST);
 	}
 	
 	@CrossOrigin
-	@GetMapping(value="/downloadFile/{id}",produces=MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<Object> downloadFile(@PathVariable int id) throws FileNotFoundException
+	@GetMapping(value="/downloadFile/{id}")
+	public ResponseEntity<byte[]> downloadFile(@PathVariable int id) throws FileNotFoundException
 	{
-		System.out.println(id);
-		Bill b=billSer.getFile(id);
-		return ResponseEntity.ok()
-				       .header("content-type", "multipart/form-data")
-				       .header(HttpHeaders.CONTENT_DISPOSITION, "attachments;file=\"" +b.getType())
-				       .body(new ByteArrayResource(b.getFile()));
+		Bill b = billSer.getFile(id);
+		Users u=b.getUser();
+		byte[] contents= billSer.getFilebyte(id);
+				
+		String filename = u.getId()+" "+b.getMonth()+" "+b.getType()+".pdf";
+		System.out.println(filename);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+		headers.setContentDispositionFormData(filename, filename);
+		ResponseEntity<byte[]> response = new ResponseEntity<>(contents,headers,HttpStatus.OK);
+		return response;
 	}
-
+	
 	@CrossOrigin
 	@DeleteMapping("/Bills/{id}")
 	public void deleteBill(@PathVariable int id)
@@ -78,5 +88,19 @@ public class BillController {
 		billSer.updateBill(bill,id);
 	}
 	
+//	@CrossOrigin
+//	@GetMapping(value="/downloadFile/{id}",produces=MediaType.APPLICATION_PDF_VALUE)
+//	public ResponseEntity<Object> downloadFile(@PathVariable int id) throws FileNotFoundException
+//	{
+//		System.out.println(id);
+//		Bill b=billSer.getFile(id);
+//		return ResponseEntity.ok()
+//				       .header("content-type", "application/pdf")
+//				       .header(HttpHeaders.CONTENT_DISPOSITION, "attachments;file=\"" +b.getType())
+//				       .body(new ByteArrayResource(b.getFile()));
+//	}
+	
+
+
 
 }

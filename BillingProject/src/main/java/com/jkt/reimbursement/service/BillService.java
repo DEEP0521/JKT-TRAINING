@@ -19,6 +19,17 @@ public class BillService {
 	@Autowired
 	private BillRepository billRepo;
 	
+	public byte[] getFilebyte(int id) throws FileNotFoundException 
+	{
+		Bill b1=billRepo.findById(id);
+		if(!b1.equals(null)) {
+			byte[] b=b1.getFile();
+			return b;
+		}
+		else
+			throw new RuntimeException("File not found-" +id);
+	}
+	
 	public void postBill(Bill bill)
 	{
 		billRepo.save(bill);
@@ -36,22 +47,28 @@ public class BillService {
 			throw new RuntimeException("Bill not found-" +id);
 	}
 	//mapping add bill user/bill
-	public void AddBill(Bill bill,MultipartFile file)
+	public boolean AddBill(Bill bill,MultipartFile file)
 	{
 		try {
 			bill.setFile(file.getBytes());
+			billRepo.save(bill);
+			return true;
 		}
 		catch(IOException e) {
 			e.printStackTrace();
-		}
-		billRepo.save(bill);
+			return false;
+		}		
 	}
 	
 	
 	public List<Bill> getBills()
 	{
 		return billRepo.findAll();
-		
+	}
+	
+	public List<Bill> getempid(String id)
+	{
+		return billRepo.findByUserId(id);
 	}
 	
 	public void delBill(int id)
