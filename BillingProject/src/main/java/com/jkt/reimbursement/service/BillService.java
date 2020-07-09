@@ -50,9 +50,15 @@ public class BillService {
 	public boolean AddBill(Bill bill,MultipartFile file)
 	{
 		try {
-			bill.setFile(file.getBytes());
-			billRepo.save(bill);
-			return true;
+			String month=bill.getMonth();
+			Bill b1=billRepo.findByMonth(month);
+			if(b1 == null) {
+				bill.setFile(file.getBytes());
+				billRepo.save(bill);
+				return true;
+			}
+			else
+				return false;
 		}
 		catch(IOException e) {
 			e.printStackTrace();

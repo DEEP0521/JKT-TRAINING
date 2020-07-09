@@ -12,4 +12,5 @@ public interface BillRepository extends JpaRepository<Bill, Integer> {
 
 	List<Bill> findByUserId(String username);
 	Bill findById(int id);
+	Bill findByMonth(String month);
 }

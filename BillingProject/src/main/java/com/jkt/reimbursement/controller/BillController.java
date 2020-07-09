@@ -33,10 +33,9 @@ public class BillController {
 	
 	@CrossOrigin
 	@GetMapping("/Bills/{userId}")
-	public List<Bill> getBillByid(@PathVariable int userId)
+	public List<Bill> getBillByid(@PathVariable String userId)
 	{
-		String chId=String.valueOf(userId);
-		List<Bill> theBill=billSer.getAllBillByUsersId(chId);
+		List<Bill> theBill=billSer.getAllBillByUsersId(userId);
 		if(theBill==null)
 		{
 			throw new RuntimeException("Employee id not found-" +userId);
@@ -50,10 +49,14 @@ public class BillController {
 			@RequestParam("file") MultipartFile file)
 	{
 		boolean b=billSer.AddBill(bill, file);
-		if(b==true)
-			return new ResponseEntity<>("JSON Along with File Uploaded",HttpStatus.OK);
-		else
-			return new ResponseEntity<>("File upload failure",HttpStatus.BAD_REQUEST);
+		if(b==true) {
+			ResponseEntity<Object> response = new ResponseEntity<>("File Upload Status",HttpStatus.OK);
+			return response;
+		}
+		else{
+			ResponseEntity<Object> response = new ResponseEntity<>("File Upload Status",HttpStatus.BAD_REQUEST);
+			return response;
+		}
 	}
 	
 	@CrossOrigin
